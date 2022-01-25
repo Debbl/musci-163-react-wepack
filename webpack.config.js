@@ -10,7 +10,7 @@ const webpackCommonConfig = {
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: './js/[name].bundle.js',
+    filename: 'static/js/[name].[contenthash:8].bundle.js',
     clean: true,
   },
   resolve: {
@@ -83,7 +83,7 @@ const webpackProdConfig = {
       cacheGroups: {
         venders: {
           test: /[\\/]node_modules[\\/]/,
-          filename: './js/[id].venders.js',
+          filename: 'static/js/[name].[contenthash:8].venders.js',
         },
       },
     },
