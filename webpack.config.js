@@ -81,9 +81,9 @@ const webpackProdConfig = {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        venders: {
+        vender: {
           test: /[\\/]node_modules[\\/]/,
-          filename: 'static/js/[name].[contenthash:8].venders.js',
+          filename: 'static/js/[name].[contenthash:8].vender.js',
         },
       },
     },
