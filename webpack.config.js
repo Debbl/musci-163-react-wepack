@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const TerserPlugin = require('terser-webpack-plugin');
 // 相同的配置 Common
@@ -76,6 +77,9 @@ const webpackCommonConfig = {
           },
         },
       ],
+    }),
+    new ESLintPlugin({
+      extensions: ['js', 'jsx', 'mjs'],
     }),
   ],
 };

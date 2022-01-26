@@ -1,0 +1,15 @@
+/dist/**
+/build/**
+.local
+.output.js
+/node_modules/**
+
+**/*.svg
+**/*.sh
+**/assets
+
+/public/**
+
+.idea/**
+.vscode/**
+.git/**
