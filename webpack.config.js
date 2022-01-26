@@ -11,12 +11,34 @@ const webpackCommonConfig = {
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'static/js/[name].[contenthash:8].bundle.js',
+    chunkFilename: '[id].[name].chunk.js',
     clean: true,
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx', '.wasm'],
     alias: {
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
+    runtimeChunk: {
+      name: function (entrypoint) {
+        return `runtime-${entrypoint.name}`;
+      },
+    },
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vender: {
+          test: /[\\/]node_modules[\\/]/,
+          filename: 'static/js/[name].[contenthash:8].vender.js',
+        },
+      },
     },
   },
   module: {
@@ -72,22 +94,6 @@ const webpackDevConfig = {
 const webpackProdConfig = {
   mode: 'production',
   devtool: false,
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-      }),
-    ],
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        vender: {
-          test: /[\\/]node_modules[\\/]/,
-          filename: 'static/js/[name].[contenthash:8].vender.js',
-        },
-      },
-    },
-  },
 };
 
 module.exports = (env) => {
