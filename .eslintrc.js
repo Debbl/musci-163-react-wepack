@@ -9,6 +9,11 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:prettier/recommended',
   ],
+  settings: {
+    react: {
+      version: '17.0.2',
+    },
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
