@@ -9,6 +9,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
 module.exports = (env) => {
   const isEnvProduction = env.production || false;
   const isEnvDevelopment = env.development || false;
@@ -105,6 +107,7 @@ module.exports = (env) => {
       open: true,
       compress: true,
     },
+    plugins: [new ReactRefreshWebpackPlugin()],
   };
 
   // 生产环境配置 Production
