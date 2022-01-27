@@ -1,11 +1,13 @@
 import React from 'react';
-import img from '@/assets/images/banner_sprite.png';
+
+import WYAppFooter from './components/app-footer';
 
 export default function App() {
   return (
     <div>
-      <img src={img} alt="" />
-      App
+      <h2>AppHeader</h2>
+      <h2></h2>
+      <WYAppFooter />
     </div>
   );
 }

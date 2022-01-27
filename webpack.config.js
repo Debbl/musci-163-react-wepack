@@ -75,6 +75,23 @@ module.exports = (env) => {
           ].filter(Boolean),
         },
         {
+          test: /\.s[ac]ss$/i,
+          use: [
+            isEnvDevelopment && 'style-loader',
+            isEnvProduction && {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 2,
+              },
+            },
+            'sass-loader',
+            'postcss-loader',
+          ].filter(Boolean),
+        },
+        {
           test: /\.(png|jpe?g|gif)$/i,
           type: 'asset',
           generator: {
