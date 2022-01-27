@@ -74,6 +74,18 @@ module.exports = (env) => {
             'postcss-loader',
           ].filter(Boolean),
         },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          type: 'asset',
+          generator: {
+            filename: 'static/img/[name].[contenthash:8][ext]',
+          },
+          parser: {
+            dataUrlCondition: {
+              maxSize: 10 * 1024,
+            },
+          },
+        },
       ],
     },
     plugins: [
