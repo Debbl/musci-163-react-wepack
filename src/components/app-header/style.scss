@@ -1,3 +1,61 @@
 .wy-app-header {
-  color: blue;
+  height: 75px;
+  background-color: #242424;
+  .content {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      .logo {
+        display: inline-block;
+        width: 176px;
+        height: 69px;
+        background-position: 0 0;
+      }
+      .select-list {
+        display: flex;
+        line-height: 70px;
+        a {
+          display: block;
+          position: relative;
+          padding: 0 20px;
+          color: #ccc;
+          &:hover,
+          &.active {
+            color: #fff;
+            background: #000;
+            text-decoration: none;
+          }
+          &.active .icon {
+            position: absolute;
+            display: inline-block;
+            width: 12px;
+            height: 7px;
+            bottom: -1.5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-position: -226px 0;
+          }
+          &:last-of-type {
+            position: relative;
+            &::after {
+              position: absolute;
+              content: '';
+              width: 28px;
+              height: 19px;
+              background-image: url(@/assets/images/sprite_01.png);
+              background-position: -193px 0;
+              top: 20px;
+              right: -15px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .divider {
+    height: 5px;
+    background-color: #c20c0c;
+  }
 }

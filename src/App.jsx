@@ -1,12 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import AppRoutes from '@/router';
+import WYAppHeader from '@/components/app-header';
+import WYAppFooter from '@/components/app-footer';
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Link to="header">header</Link>
+      <WYAppHeader />
       <AppRoutes />
+      <WYAppFooter />
     </BrowserRouter>
   );
 }

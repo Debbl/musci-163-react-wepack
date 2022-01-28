@@ -1,1 +1,12 @@
 @import url('./reset.css');
+
+
+/* 全局样式 */
+.wrap-v1 {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.sprite-01 {
+  background: url(../images/sprite_01.png) no-repeat 0 9999px;
+}

@@ -1,21 +1,22 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
-import WYAppHeader from '@/components/app-header';
-import WYAppFooter from '@/components/app-footer';
+import WYDiscover from '@/pages/discover';
+import WYFriend from '@/pages/friend';
+import WYMine from '@/pages/mine';
 
 function AppRoutes() {
   let AppRoutes = useRoutes([
     {
       path: '/',
-      element: <WYAppFooter />,
+      element: <WYDiscover />,
     },
     {
-      path: 'header',
-      element: <WYAppHeader />,
+      path: 'mine',
+      element: <WYMine />,
     },
     {
-      path: 'footer',
-      element: <WYAppFooter />,
+      path: 'friend',
+      element: <WYFriend />,
     },
   ]);
   return AppRoutes;
