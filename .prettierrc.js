@@ -6,5 +6,4 @@ module.exports = {
   singleQuote: true, // 使用单引号
   trailingComma: 'all', // 尾随逗号
   bracketSpacing: true, // { foo: bar } 有空格
-  jsxBracketSameLine: false // JSX 中的 > 放在下一行
 };
