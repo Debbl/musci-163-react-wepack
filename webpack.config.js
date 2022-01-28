@@ -81,6 +81,9 @@ module.exports = (env) => {
             isEnvDevelopment && 'style-loader',
             isEnvProduction && {
               loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: '../../',
+              },
             },
             {
               loader: 'css-loader',
@@ -88,8 +91,8 @@ module.exports = (env) => {
                 importLoaders: 2,
               },
             },
-            'sass-loader',
             'postcss-loader',
+            'sass-loader',
           ].filter(Boolean),
         },
         {
