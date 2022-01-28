@@ -44,13 +44,37 @@
               content: '';
               width: 28px;
               height: 19px;
-              background-image: url(@/assets/images/sprite_01.png);
+              background-image: url(../../assets/images/sprite_01.png);
               background-position: -193px 0;
               top: 20px;
               right: -15px;
             }
           }
         }
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      color: #ccc;
+      font-size: 12px;
+      .search {
+        width: 158px;
+        height: 32px;
+        border-radius: 16px;
+        input::placeholder {
+          font-size: 12px;
+        }
+      }
+      .center {
+        width: 90px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 16px;
+        text-align: center;
+        border: 1px solid #666;
+        border-radius: 16px;
+        background-color: transparent;
       }
     }
   }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 
 import './style.scss';
 import { headerLinks } from '@/common/local-data';
@@ -25,7 +27,15 @@ export default function WYAppHeader() {
             )}
           </div>
         </div>
-        <div className="right">right</div>
+        <div className="right">
+          <Input
+            className="search"
+            placeholder="音乐/视频/电台/用户"
+            prefix={<SearchOutlined />}
+          />
+          <div className="center">创作者中心</div>
+          <div>登录</div>
+        </div>
       </div>
       <div className="divider"></div>
     </div>
