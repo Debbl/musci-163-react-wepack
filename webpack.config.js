@@ -14,6 +14,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = (env) => {
   const isEnvProduction = env.production || false;
   const isEnvDevelopment = env.development || false;
+  process.env.NODE_ENV = isEnvProduction ? 'production' : 'development';
 
   // 相同的配置 Common
   const webpackCommonConfig = {
@@ -135,6 +136,7 @@ module.exports = (env) => {
     devServer: {
       open: true,
       compress: true,
+      historyApiFallback: true,
     },
     plugins: [new ReactRefreshWebpackPlugin()],
   };
