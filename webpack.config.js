@@ -139,6 +139,7 @@ module.exports = (env) => {
     devtool: 'cheap-module-source-map',
     devServer: {
       open: true,
+      hot: true,
       compress: true,
       historyApiFallback: true,
     },
