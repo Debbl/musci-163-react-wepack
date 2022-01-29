@@ -12,7 +12,7 @@ import WYArtist from '@/pages/discover/c-pages/artist';
 import WYAlbum from '@/pages/discover/c-pages/album';
 
 function AppRoutes() {
-  let AppRoutes = useRoutes([
+  const AppRoutes = useRoutes([
     {
       path: '/',
       element: <Navigate to="discover" />,

@@ -23,6 +23,7 @@ module.exports = (env) => {
       path: path.resolve(__dirname, './build'),
       filename: 'static/js/[name].[contenthash:8].bundle.js',
       chunkFilename: '[id].[name].chunk.js',
+      publicPath: '/',
       clean: true,
     },
     resolve: {
