@@ -7,4 +7,9 @@ const instance = axios.create({
   timeout: TIMEOUT,
 });
 
+// 拦截器
+instance.interceptors.response.use((res) => {
+  return res.data;
+});
+
 export default instance;

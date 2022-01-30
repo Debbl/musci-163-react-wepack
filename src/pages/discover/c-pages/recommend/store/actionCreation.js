@@ -3,13 +3,12 @@ import * as actionTypes from './constants';
 
 const changeTopBannersAction = (res) => ({
   type: actionTypes.CHANGE_TOP_BANNERS,
-  topBanners: res.data.banners,
+  topBanners: res.banners,
 });
 
 const getTopBannersActions = () => {
   return (dispatch) => {
     getTopBanners().then((res) => {
-      console.log(res.data.banners);
       dispatch(changeTopBannersAction(res));
     });
   };

@@ -1,34 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import './style.scss';
 import { discoverMenu } from '@/common/local-data.js';
-import { getTopBannersActions } from './c-pages/recommend/store/actionCreation';
 
 export default function WYDiscover() {
-  const dispatch = useDispatch();
-
-  // const { topBanners } = useSelector((state) => ({
-  //   topBanners: state.getIn(['recommend', 'topBanners']),
-  // }));
-  const state = useSelector((state) => state);
-  console.log(state, 'l.....');
-
-  useEffect(() => {
-    console.log('ok');
-    const temp = getTopBannersActions();
-    console.log(temp);
-    dispatch({
-      type: 'recommend/CHANGE_TOP_BANNERS',
-      topBanners: '1199933',
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log(state, 'llll');
-  }, [state]);
-
   return (
     <div className="wy-discover">
       <div className="top">
