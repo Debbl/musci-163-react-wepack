@@ -1,12 +1,12 @@
-import { getTopBanners } from '@/services/recommend';
 import * as actionTypes from './constants';
+import { getTopBanners } from '@/services/recommend';
 
 const changeTopBannersAction = (res) => ({
   type: actionTypes.CHANGE_TOP_BANNERS,
   topBanners: res.banners,
 });
 
-const getTopBannersActions = () => {
+const getTopBannersAction = () => {
   return (dispatch) => {
     getTopBanners().then((res) => {
       dispatch(changeTopBannersAction(res));
@@ -14,4 +14,4 @@ const getTopBannersActions = () => {
   };
 };
 
-export { getTopBannersActions };
+export { getTopBannersAction };

@@ -1,26 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { shallowEqual, useSelector } from 'react-redux';
+import React from 'react';
 
-import { getTopBannersActions } from '@/pages/discover/c-pages/recommend/store/actionCreation.js';
+import WYTopBanners from './c-cpns/top-banners';
 
 export default function WYRecommend() {
-  const dispatch = useDispatch();
-  const { topBanners } = useSelector(
-    (state) => ({
-      topBanners: state.getIn(['recommend', 'topBanners']),
-    }),
-    shallowEqual,
-  );
-
-  useEffect(() => {
-    dispatch(getTopBannersActions());
-    console.log(topBanners);
-  }, [dispatch]);
-
   return (
     <div>
-      <h2>Recommend {topBanners.length}</h2>
+      <WYTopBanners></WYTopBanners>
     </div>
   );
 }
