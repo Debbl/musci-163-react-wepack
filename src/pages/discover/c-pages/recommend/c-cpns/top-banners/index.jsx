@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { shallowEqual, useSelector } from 'react-redux';
-
 import { Carousel } from 'antd';
-import { getTopBannersAction } from '@/pages/discover/c-pages/recommend/store/actionCreation';
 
 import './style.scss';
+import { getTopBannersAction } from '@/pages/discover/c-pages/recommend/store/actionCreation';
 
 export default function WYTopBanners() {
   const dispatch = useDispatch();
@@ -16,25 +15,26 @@ export default function WYTopBanners() {
     shallowEqual,
   );
 
-  const [bgImageUrl, setBgImageUrl] = useState();
+  const [currentBannerIdx, setCurrentBannerIdx] = useState(0);
   const carouselRef = useRef();
   useEffect(() => {
     dispatch(getTopBannersAction());
   }, [dispatch]);
-  useEffect(() => {
-    setBgImageUrl(
-      topBanners[0] && topBanners[0].imageUrl + '?imageView&blur=40x20',
-    );
-  }, []);
 
-  const getCurrentImg = (from, to) => {
-    setBgImageUrl(topBanners[to].imageUrl + '?imageView&blur=40x20');
-  };
+  const getCurrentBgImgIdx = useCallback((from, to) => {
+    setCurrentBannerIdx(to);
+  }, []);
 
   return (
     <div
       className="wy-top-banners"
-      style={{ backgroundImage: `url(${bgImageUrl})` }}
+      style={{
+        backgroundImage: `url(${
+          topBanners[currentBannerIdx]
+            ? topBanners[currentBannerIdx].imageUrl + '?imageView&blur=40x20'
+            : ''
+        })`,
+      }}
     >
       <div className="banner wrap-v2">
         <div className="left">
@@ -43,7 +43,7 @@ export default function WYTopBanners() {
             dots={{ className: 'wy-dots' }}
             ref={carouselRef}
             effect="fade"
-            beforeChange={getCurrentImg}
+            beforeChange={getCurrentBgImgIdx}
           >
             {topBanners.map((item) => (
               <div className="banner-item" key={item.imageUrl}>
