@@ -34,7 +34,7 @@ export default function WYAppHeader() {
             prefix={<SearchOutlined />}
           />
           <div className="center">创作者中心</div>
-          <div>登录</div>
+          <div className="login-btn">登录</div>
         </div>
       </div>
       <div className="divider"></div>

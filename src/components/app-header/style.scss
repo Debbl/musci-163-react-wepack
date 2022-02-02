@@ -42,12 +42,12 @@
             &::after {
               position: absolute;
               content: '';
+              top: 20px;
+              right: -15px;
               width: 28px;
               height: 19px;
               background-image: url(../../assets/images/sprite_01.png);
               background-position: -193px 0;
-              top: 20px;
-              right: -15px;
             }
           }
         }
@@ -72,9 +72,13 @@
         line-height: 32px;
         margin: 0 16px;
         text-align: center;
+        cursor: pointer;
         border: 1px solid #666;
         border-radius: 16px;
         background-color: transparent;
+      }
+      .login-btn {
+        cursor: pointer;
       }
     }
   }
