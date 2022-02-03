@@ -1,0 +1,3 @@
+const HOT_RECOMMEND_LIMIT = 8;
+
+export { HOT_RECOMMEND_LIMIT };

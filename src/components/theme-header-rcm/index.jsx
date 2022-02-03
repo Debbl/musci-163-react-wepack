@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import './style.scss';
 
 WYThemeHeaderRCM.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   keywords: PropTypes.arrayOf(PropTypes.string),
+};
+
+WYThemeHeaderRCM.defaultProps = {
+  keywords: [],
 };
 
 export default function WYThemeHeaderRCM({ title, keywords }) {

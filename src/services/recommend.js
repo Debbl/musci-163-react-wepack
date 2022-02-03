@@ -6,4 +6,13 @@ function getTopBanners() {
   });
 }
 
-export { getTopBanners };
+function getHotRecommend(limit) {
+  return request({
+    url: '/personalized',
+    params: {
+      limit,
+    },
+  });
+}
+
+export { getTopBanners, getHotRecommend };

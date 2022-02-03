@@ -3,6 +3,8 @@ import React from 'react';
 import './style.scss';
 import WYHotRecommend from './c-cpns/hot-recommend';
 import WYTopBanners from './c-cpns/top-banners';
+import WYNewAlbum from './c-cpns/new-album';
+import WYRecommendRanking from './c-cpns/recommend-ranking';
 
 export default function WYRecommend() {
   return (
@@ -10,7 +12,9 @@ export default function WYRecommend() {
       <WYTopBanners></WYTopBanners>
       <div className="content wrap-v2">
         <div className="left">
-          <WYHotRecommend></WYHotRecommend>
+          <WYHotRecommend />
+          <WYNewAlbum />
+          <WYRecommendRanking />
         </div>
         <div className="right"></div>
       </div>
