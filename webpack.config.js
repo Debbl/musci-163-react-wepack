@@ -110,7 +110,9 @@ module.exports = (env) => {
               options: {
                 importLoaders: 1,
                 modules: {
-                  localIdentName: '[name]-[hash:base64:5]',
+                  localIdentName: isEnvProduction
+                    ? '[hash:base64:6]'
+                    : '[local]-[hash:base64:5]',
                 },
               },
             },
@@ -133,7 +135,9 @@ module.exports = (env) => {
               options: {
                 importLoaders: 2,
                 modules: {
-                  localIdentName: '[name]-[hash:base64:5]',
+                  localIdentName: isEnvProduction
+                    ? '[hash:base64:6]'
+                    : '[local]-[hash:base64:5]',
                 },
               },
             },
