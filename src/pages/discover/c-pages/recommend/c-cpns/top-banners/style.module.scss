@@ -25,7 +25,7 @@
             background-image: url('@/assets/images/banner_sprite.png');
             background-position: 3px -343px;
           }
-          &.slick-active {
+          &:global(.slick-active) {
             width: 16px;
             button {
               margin: 0 0;

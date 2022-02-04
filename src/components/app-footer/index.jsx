@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react';
 
-import './style.scss';
+import style from './style.module.scss';
 import { footerLinks } from '@/common/local-data';
 import { footerImages } from '@/common/local-data';
 
 export default function WYAppFooter() {
   return (
-    <div className="wy-app-footer">
-      <div className="center wrap-v2">
-        <div className="left">
-          <div className="link">
+    <div className={style['wy-app-footer']}>
+      <div className={`${style['center']} wrap-v2`}>
+        <div className={style['left']}>
+          <div className={style['link']}>
             {footerLinks.map((item) => (
               <Fragment key={item.title}>
                 <a href={item.link}>{item.title}</a>
-                <span className="line">|</span>
+                <span className={style['line']}>|</span>
               </Fragment>
             ))}
           </div>
-          <div className="copyright">
+          <div className={style['copyright']}>
             <span>网易公司版权所有©1997-2020</span>
             <span>
               杭州乐读科技有限公司运营：
@@ -54,18 +54,18 @@ export default function WYAppFooter() {
             </a>
           </div>
         </div>
-        <div className="right">
+        <div className={style['right']}>
           {footerImages.map((item) => (
-            <li className="item" key={item.link}>
+            <li className={style['item']} key={item.link}>
               <a
-                className="link"
+                className={style['link']}
                 href={item.link}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 {' '}
               </a>
-              <span className="title"></span>
+              <span className={style['title']}></span>
             </li>
           ))}
         </div>

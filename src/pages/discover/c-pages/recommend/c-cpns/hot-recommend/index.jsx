@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import './style.scss';
+import style from './style.module.scss';
 import { HOT_RECOMMEND_LIMIT } from '@/common/constants';
 import { getHotRecommendAction } from '../../store/actionCreation';
 import WYThemeHeaderRCM from '@/components/theme-header-rcm';
@@ -21,12 +21,12 @@ export default function WYHotRecommend() {
   }, [dispatch]);
 
   return (
-    <div className="wy-hot-recommend">
+    <div className={style['wy-hot-recommend']}>
       <WYThemeHeaderRCM
         title="热门推荐"
         keywords={['华语', '流行', '民谣', '摇滚', '电子']}
       />
-      <div className="recommend-list">
+      <div className={style['recommend-list']}>
         {hotRecommends.map((item) => (
           <WYSongsCover key={item.id} info={item} />
         ))}
