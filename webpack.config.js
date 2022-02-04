@@ -75,6 +75,7 @@ module.exports = (env) => {
             },
             'postcss-loader',
           ].filter(Boolean),
+          exclude: /\.module.css$/,
         },
         {
           test: /\.s[ac]ss$/i,
@@ -95,6 +96,51 @@ module.exports = (env) => {
             'postcss-loader',
             'sass-loader',
           ].filter(Boolean),
+          exclude: /\.module\.s[ac]ss$/,
+        },
+        {
+          test: /\.css$/i,
+          use: [
+            isEnvDevelopment && 'style-loader',
+            isEnvProduction && {
+              loader: MiniCssExtractPlugin.loader,
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                modules: {
+                  localIdentName: '[name]-[hash:base64:5]',
+                },
+              },
+            },
+            'postcss-loader',
+          ].filter(Boolean),
+          include: /\.module\.css$/,
+        },
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            isEnvDevelopment && 'style-loader',
+            isEnvProduction && {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: '../../',
+              },
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 2,
+                modules: {
+                  localIdentName: '[name]-[hash:base64:5]',
+                },
+              },
+            },
+            'postcss-loader',
+            'sass-loader',
+          ].filter(Boolean),
+          include: /\.module\.s[ac]ss$/,
         },
         {
           test: /\.(png|jpe?g|gif)$/i,

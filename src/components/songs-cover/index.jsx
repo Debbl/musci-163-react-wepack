@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './style.scss';
+import style from './style.module.scss';
 
 WYSongsCover.propTypes = {
   info: PropTypes.object.isRequired,
@@ -9,21 +9,21 @@ WYSongsCover.propTypes = {
 
 export default function WYSongsCover({ info }) {
   return (
-    <div className="wy-songs-cover">
-      <div className="cover-wrapper" title={info.name}>
+    <div className={style['wy-songs-cover']}>
+      <div className={style['cover-wrapper']} title={info.name}>
         <img src={info.picUrl} alt={info.copywriter} />
-        <div className="cover">
-          <div className="info sprite-cover">
+        <div className={style['cover']}>
+          <div className={`${style['info']} sprite-cover`}>
             <span>
-              <i className="erji sprite-icon"></i>
+              <i className={`${style['erji']} sprite-icon`}></i>
               <span>{info.playCount}</span>
             </span>
-            <i className="play sprite-icon"></i>
+            <i className={`${style['play']} sprite-icon`}></i>
           </div>
         </div>
       </div>
-      <div className="cover-bottom text-nowrap">{info.name}</div>
-      <div className="cover-source text-nowrap">
+      <div className={`${style['cover-bottom']} text-nowrap`}>{info.name}</div>
+      <div className={`${style['cover-source']} text-nowrap`}>
         by {info.copywriter || info.creator.nickname}
       </div>
     </div>
