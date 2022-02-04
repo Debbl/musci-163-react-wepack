@@ -2,6 +2,13 @@
 @import url('./reset.css');
 
 /* 全局样式 */
+
+text-nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .wrap-v1 {
   width: 1100px;
   margin: 0 auto;
@@ -18,4 +25,11 @@
 
 .sprite-02 {
   background: url(../images/sprite_02.png) no-repeat 0 9999px;
+}
+
+.sprite-cover {
+  background: url(../images/sprite_cover.png) no-repeat 0 9999px;
+}
+.sprite-icon {
+  background: url(../images/sprite_icon.png) no-repeat 0 9999px;
 }

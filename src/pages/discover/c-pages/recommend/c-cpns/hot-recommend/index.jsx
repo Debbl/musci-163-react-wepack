@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import './style.scss';
 import { HOT_RECOMMEND_LIMIT } from '@/common/constants';
 import { getHotRecommendAction } from '../../store/actionCreation';
 import WYThemeHeaderRCM from '@/components/theme-header-rcm';
+import WYSongsCover from '@/components/songs-cover';
 
 export default function WYHotRecommend() {
   const dispatch = useDispatch();
@@ -24,7 +26,11 @@ export default function WYHotRecommend() {
         title="热门推荐"
         keywords={['华语', '流行', '民谣', '摇滚', '电子']}
       />
-      <div className="recommend-list">{hotRecommends.length}</div>
+      <div className="recommend-list">
+        {hotRecommends.map((item) => (
+          <WYSongsCover key={item.id} info={item} />
+        ))}
+      </div>
     </div>
   );
 }
