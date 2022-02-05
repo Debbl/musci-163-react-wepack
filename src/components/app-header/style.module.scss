@@ -22,12 +22,12 @@
           padding: 0 20px;
           color: #ccc;
           &:hover,
-          &.active {
+          &:global(.active) {
             color: #fff;
             background: #000;
             text-decoration: none;
           }
-          &.active .icon {
+          &:global(.active) .icon {
             position: absolute;
             display: inline-block;
             width: 12px;

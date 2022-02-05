@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import style from './style.module.scss';
 import { getCount, getSizeImage } from '@/utils/format-utils';
+
 WYSongsCover.propTypes = {
   info: PropTypes.object.isRequired,
 };
