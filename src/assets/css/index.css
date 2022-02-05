@@ -33,3 +33,13 @@
 .sprite-icon {
   background: url(../images/sprite_icon.png) no-repeat 0 9999px;
 }
+
+.image-cover {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-indent: -9999px;
+  background: url(../images/sprite_cover.png) no-repeat -145px -57px;
+}

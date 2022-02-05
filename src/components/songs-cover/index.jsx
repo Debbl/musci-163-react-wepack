@@ -25,7 +25,7 @@ export default function WYSongsCover({ info }) {
       </div>
       <div className={`${style['cover-bottom']} text-nowrap`}>{info.name}</div>
       <div className={`${style['cover-source']} text-nowrap`}>
-        by {info.copywriter || info.creator.nickname}
+        by {info.copywriter}
       </div>
     </div>
   );
