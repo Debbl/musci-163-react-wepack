@@ -15,4 +15,13 @@ function getHotRecommend(limit) {
   });
 }
 
-export { getTopBanners, getHotRecommend };
+function getNewAlbums(limit) {
+  return request({
+    url: '/top/album',
+    params: {
+      limit,
+    },
+  });
+}
+
+export { getTopBanners, getHotRecommend, getNewAlbums };
