@@ -3,7 +3,7 @@
 
 /* 全局样式 */
 
-text-nowrap {
+.text-nowrap {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
