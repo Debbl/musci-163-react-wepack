@@ -17,7 +17,7 @@ export default function WYAppPlayerBar() {
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
   useEffect(() => {
-    console.log('dispatch改变了。。。。');
+    // console.log('dispatch改变了。。。。');
     dispatch(getSongDetailAction(167876));
   }, [dispatch]);
   useEffect(() => {
@@ -42,15 +42,19 @@ export default function WYAppPlayerBar() {
     // console.log('slider', value);
     setCurrentTime(value);
   }, []);
-  const handleSliderAfterChange = useCallback((value) => {
-    setIsHandleChangeFlag(false);
-    // console.log(value / 1000);
-    audioRef.current.currentTime = value / 1000;
-    setCurrentTime(value);
-    // console.log('after', value);
-  }, []);
+  const handleSliderAfterChange = useCallback(
+    (value) => {
+      setIsHandleChangeFlag(false);
+      // console.log(value / 1000);
+      audioRef.current.currentTime = value / 1000;
+      setCurrentTime(value);
+      // console.log('after', value);
+      !isPlayingFlag && playMusic();
+    },
+    [isPlayingFlag, playMusic],
+  );
 
-  console.log('页面刷新。。。');
+  // console.log('页面刷新。。。');
   return (
     <div className={`${style['wy-app-player-bar']} sprite-player`}>
       <div className={`${style['content']} wrap-v2`}>
