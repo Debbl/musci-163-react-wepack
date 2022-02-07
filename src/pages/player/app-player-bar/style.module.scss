@@ -1,0 +1,122 @@
+.wy-app-player-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 53px;
+  background-position: 0 0 !important;
+  background-repeat: repeat !important;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 47px;
+    .control {
+      display: flex;
+      align-items: center;
+      .prev {
+        width: 28px;
+        height: 28px;
+        background-position: 0 -130px;
+      }
+      .play {
+        width: 36px;
+        height: 36px;
+        margin: 0 8px;
+      }
+      .next {
+        width: 28px;
+        height: 28px;
+        background-position: -80px -130px;
+      }
+    }
+    .play-info {
+      display: flex;
+      align-items: center;
+      width: 642px;
+
+      .image {
+        img {
+          width: 34px;
+          height: 34px;
+          border-radius: 5px;
+        }
+      }
+      .info {
+        flex: 1;
+        margin-left: 10px;
+        color: #a1a1a1;
+        .song {
+          position: relative;
+          top: 8px;
+          left: 8px;
+          font-size: 12px;
+          color: #e1e1e1;
+        }
+        .singer-name {
+          margin-left: 10px;
+          color: #a1a1a1;
+        }
+        .progress {
+          display: flex;
+          align-items: center;
+          :global(.ant-slider) {
+            width: 493px;
+            margin-right: 10px;
+            :global(.ant-slider-rail) {
+              height: 9px;
+              background: url('@/assets/images/progress_bar.png') right 0;
+            }
+            :global(.ant-slider-track) {
+              height: 9px;
+              background: url('@/assets/images/progress_bar.png') left -66px;
+            }
+            :global(.ant-slider-handle) {
+              width: 22px;
+              height: 22px;
+              border: none;
+              margin-top: -7px;
+              background: url('@/assets/images/sprite_icon.png') 0 -250px;
+            }
+          }
+        }
+      }
+    }
+    .operator {
+      display: flex;
+      width: 200px;
+      .btn {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+      }
+      .left {
+        .favor {
+          background-position: -88px -163px;
+        }
+        .share {
+          background-position: -114px -163px;
+        }
+      }
+      .right {
+        width: 126px;
+        padding-left: 13px;
+        background-position: -147px -248px;
+        .volume {
+          background-position: -2px -248px;
+        }
+        .loop {
+          background-position: -66px -248px;
+        }
+        .playlist {
+          width: 60px;
+          background-position: -42px -68px;
+        }
+      }
+    }
+  }
+}

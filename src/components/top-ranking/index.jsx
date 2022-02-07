@@ -9,8 +9,6 @@ WYTopRanking.propTypes = {
 
 export default function WYTopRanking({ info }) {
   const { tracks = [] } = info;
-  console.log(info.id);
-  console.log(tracks);
   return (
     <div className={style['wy-top-ranking']}>
       <div className={style['header']}>
