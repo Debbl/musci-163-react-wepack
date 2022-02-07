@@ -35,6 +35,8 @@ export default function WYAppPlayerBar() {
     const audioCurrentTime = e.target.currentTime * 1000;
     // console.log(audioCurrentTime);
     !isHandleChangeFlag && setCurrentTime(audioCurrentTime);
+    fmtDuration === fmtCurrentTime && setIsPlayingFlag(false);
+    // console.log(fmtCurrentTime);
   };
   const handleMusicEnded = () => {};
   const handleSliderChange = useCallback((value) => {
