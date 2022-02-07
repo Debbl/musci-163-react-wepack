@@ -1,0 +1,9 @@
+.wy-recommend-ranking {
+  .tops {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    height: 472px;
+    background-image: url('@/assets/images/recommend-top-bg.png');
+  }
+}

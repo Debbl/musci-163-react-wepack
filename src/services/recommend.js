@@ -24,4 +24,13 @@ function getNewAlbums(limit) {
   });
 }
 
-export { getTopBanners, getHotRecommend, getNewAlbums };
+function getTopList(idx) {
+  return request({
+    url: '/top/list',
+    params: {
+      idx,
+    },
+  });
+}
+
+export { getTopBanners, getHotRecommend, getNewAlbums, getTopList };

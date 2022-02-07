@@ -33,6 +33,9 @@
 .sprite-icon {
   background: url(../images/sprite_icon.png) no-repeat 0 9999px;
 }
+.sprite-icon2 {
+  background: url(../images/sprite_icon2.png) no-repeat 0 9999px;
+}
 
 .image-cover {
   position: absolute;
