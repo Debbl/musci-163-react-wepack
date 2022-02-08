@@ -24,6 +24,7 @@ export default function WYAppPlayerBar() {
     audioRef.current.src = getPlayerSongUrl(currentSong.id);
   }, [currentSong]);
 
+  const singerName = (currentSong.ar && currentSong.ar[0].name) || '未知歌手';
   const durationTime = currentSong.dt || 0;
   const fmtDuration = formatDate(durationTime, 'mm:ss');
   const fmtCurrentTime = formatDate(currentTime, 'mm:ss');
@@ -81,7 +82,7 @@ export default function WYAppPlayerBar() {
             <div className={style['song']}>
               <span className={style['song-name']}>{currentSong.name}</span>
               <a href="" className={style['singer-name']}>
-                {'未知歌手'}
+                {singerName}
               </a>
             </div>
             <div className={style['progress']}>
