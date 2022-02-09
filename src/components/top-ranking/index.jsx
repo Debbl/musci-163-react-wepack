@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import style from './style.module.scss';
+import { getAddItemToPlayMusicsListAction } from '../../pages/player/store/actionCreators';
 
 WYTopRanking.propTypes = {
   info: PropTypes.object,
 };
 
 export default function WYTopRanking({ info }) {
+  const dispatch = useDispatch();
+
   const { tracks = [] } = info;
+  const addItemToPlayList = (ids) => {
+    console.log('点击了');
+    dispatch(getAddItemToPlayMusicsListAction(ids));
+  };
   return (
     <div className={style['wy-top-ranking']}>
       <div className={style['header']}>
@@ -41,6 +49,7 @@ export default function WYTopRanking({ info }) {
                 ></button>
                 <button
                   className={`${style['btn']} ${style['addto']} sprite-icon2`}
+                  onClick={() => addItemToPlayList(item.id)}
                 ></button>
                 <button
                   className={`${style['btn']} ${style['favor']} sprite-02`}

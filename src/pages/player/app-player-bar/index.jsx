@@ -3,15 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd';
 
 import style from './style.module.scss';
-import { getSongDetailAction } from '../store/actionCreators';
+import {
+  getSongDetailAction,
+  getChangeCurrentSongIndexAction,
+} from '../store/actionCreators';
 import { getPlayerSongUrl, formatDate } from '@/utils/format-utils';
 
 export default function WYAppPlayerBar() {
   const dispatch = useDispatch();
-  const { currentSong } = useSelector((state) => ({
-    currentSong: state.getIn(['player', 'currentSong']),
+  const { currentSongIndex, playMusicsList } = useSelector((state) => ({
+    currentSongIndex: state.getIn(['player', 'currentSongIndex']),
+    playMusicsList: state.getIn(['player', 'playMusicsList']),
   }));
 
+  const currentSong = playMusicsList[currentSongIndex];
   const audioRef = useRef();
   const [currentTime, setCurrentTime] = useState(0);
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
@@ -21,25 +26,30 @@ export default function WYAppPlayerBar() {
     dispatch(getSongDetailAction(167876));
   }, [dispatch]);
   useEffect(() => {
-    audioRef.current.src = getPlayerSongUrl(currentSong.id);
+    audioRef.current.src = getPlayerSongUrl(currentSong?.id);
+    isPlayingFlag && audioRef.current.play();
   }, [currentSong]);
 
-  const singerName = (currentSong.ar && currentSong.ar[0].name) || '未知歌手';
-  const durationTime = currentSong.dt || 0;
+  const singerName = (currentSong?.ar && currentSong.ar[0].name) || '未知歌手';
+  const durationTime = currentSong?.dt || 0;
   const fmtDuration = formatDate(durationTime, 'mm:ss');
   const fmtCurrentTime = formatDate(currentTime, 'mm:ss');
   const playMusic = useCallback(() => {
-    !isPlayingFlag ? audioRef.current.play() : audioRef.current.pause();
+    !isPlayingFlag
+      ? audioRef.current.play().catch(() => setIsPlayingFlag(false))
+      : audioRef.current.pause();
     setIsPlayingFlag(!isPlayingFlag);
   }, [isPlayingFlag]);
   const handleTimeUpdate = (e) => {
     const audioCurrentTime = e.target.currentTime * 1000;
     // console.log(audioCurrentTime);
     !isHandleChangeFlag && setCurrentTime(audioCurrentTime);
-    fmtDuration === fmtCurrentTime && setIsPlayingFlag(false);
+    // fmtDuration === fmtCurrentTime && setIsPlayingFlag(false);
     // console.log(fmtCurrentTime);
   };
-  const handleMusicEnded = () => {};
+  const handleMusicEnded = () => {
+    setIsPlayingFlag(false);
+  };
   const handleSliderChange = useCallback((value) => {
     setIsHandleChangeFlag(true);
     // console.log('slider', value);
@@ -56,13 +66,27 @@ export default function WYAppPlayerBar() {
     },
     [isPlayingFlag, playMusic],
   );
+  // 改变当前播放歌曲索引
+  const changeCurrentSongIndex = (step) => {
+    let index = currentSongIndex + step;
+    // console.log(index);
+    // console.log(playMusicsList.length, 'length');
+    if (index < 0) index = 0;
+    if (index > playMusicsList.length - 1) index = playMusicsList.length - 1;
+    // console.log(index);
+    index !== currentSongIndex &&
+      dispatch(getChangeCurrentSongIndexAction(index));
+  };
 
   // console.log('页面刷新。。。');
   return (
     <div className={`${style['wy-app-player-bar']} sprite-player`}>
       <div className={`${style['content']} wrap-v2`}>
         <div className={style['control']}>
-          <button className={`${style['prev']} sprite-player`}></button>
+          <button
+            className={`${style['prev']} sprite-player`}
+            onClick={() => changeCurrentSongIndex(-1)}
+          ></button>
           <button
             className={`${style['play']} sprite-player`}
             style={{
@@ -70,7 +94,10 @@ export default function WYAppPlayerBar() {
             }}
             onClick={playMusic}
           ></button>
-          <button className={`${style['next']} sprite-player`}></button>
+          <button
+            className={`${style['next']} sprite-player`}
+            onClick={() => changeCurrentSongIndex(1)}
+          ></button>
         </div>
         <div className={style['play-info']}>
           <div className={style['image']}>
@@ -80,7 +107,7 @@ export default function WYAppPlayerBar() {
           </div>
           <div className={style['info']}>
             <div className={style['song']}>
-              <span className={style['song-name']}>{currentSong.name}</span>
+              <span className={style['song-name']}>{currentSong?.name}</span>
               <a href="" className={style['singer-name']}>
                 {singerName}
               </a>
