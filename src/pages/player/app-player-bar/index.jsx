@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from 'antd';
 
 import style from './style.module.scss';
-import {
-  getSongDetailAction,
-  getChangeCurrentSongIndexAction,
-} from '../store/actionCreators';
+import { getChangeCurrentSongIndexAction } from '../store/actionCreators';
 import { getPlayerSongUrl, formatDate } from '@/utils/format-utils';
 
 export default function WYAppPlayerBar() {
@@ -21,10 +18,6 @@ export default function WYAppPlayerBar() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
-  useEffect(() => {
-    // console.log('dispatch改变了。。。。');
-    dispatch(getSongDetailAction(167876));
-  }, [dispatch]);
   useEffect(() => {
     audioRef.current.src = getPlayerSongUrl(currentSong?.id);
     isPlayingFlag && audioRef.current.play();

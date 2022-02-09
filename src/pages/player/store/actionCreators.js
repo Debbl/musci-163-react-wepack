@@ -1,20 +1,6 @@
 import * as actionTypes from './constants';
 import { getSongDetail } from '@/services/player';
 
-// 当前播放歌曲信息
-const changeCurrentSongAction = (currentSong) => ({
-  type: actionTypes.CHANGE_CURRENT_SONG,
-  currentSong,
-});
-
-const getSongDetailAction = (ids) => {
-  return (dispatch) => {
-    getSongDetail(ids).then((res) => {
-      dispatch(changeCurrentSongAction(res.songs[0]));
-    });
-  };
-};
-
 // 添加歌曲到播放列表 action
 const addItemToPlayMusicsListAction = (item) => ({
   type: actionTypes.Add_ITEM_TO_PLAY_MUSICS_LIST,
@@ -46,8 +32,4 @@ const getChangeCurrentSongIndexAction = (index) => {
   };
 };
 
-export {
-  getSongDetailAction,
-  getAddItemToPlayMusicsListAction,
-  getChangeCurrentSongIndexAction,
-};
+export { getAddItemToPlayMusicsListAction, getChangeCurrentSongIndexAction };
