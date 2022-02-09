@@ -55,12 +55,13 @@ export default function WYAppPlayerBar() {
     const currentLyricIndex =
       currentSongLyrics.findIndex((item) => audioCurrentTime < item.time) - 1;
     // console.log(currentLyricIndex);
-    message.open({
-      key: 'lyric',
-      className: 'lyric-message',
-      duration: 0,
-      content: currentSongLyrics[currentLyricIndex].content,
-    });
+    currentSongLyrics[currentLyricIndex]?.content &&
+      message.open({
+        key: 'lyric',
+        className: 'lyric-message',
+        duration: 0,
+        content: currentSongLyrics[currentLyricIndex]?.content,
+      });
   };
   const handleMusicEnded = () => {
     setIsPlayingFlag(false);
