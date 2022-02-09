@@ -1,25 +1,35 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Slider } from 'antd';
+import { Slider, message } from 'antd';
 
 import style from './style.module.scss';
-import { getChangeCurrentSongIndexAction } from '../store/actionCreators';
+import {
+  getChangeCurrentSongIndexAction,
+  getChangeCurrentSongLyricsAction,
+} from '../store/actionCreators';
 import { getPlayerSongUrl, formatDate } from '@/utils/format-utils';
 
 export default function WYAppPlayerBar() {
   const dispatch = useDispatch();
-  const { currentSongIndex, playMusicsList } = useSelector((state) => ({
-    currentSongIndex: state.getIn(['player', 'currentSongIndex']),
-    playMusicsList: state.getIn(['player', 'playMusicsList']),
-  }));
+  const { currentSongIndex, currentSongLyrics, playMusicsList } = useSelector(
+    (state) => ({
+      currentSongIndex: state.getIn(['player', 'currentSongIndex']),
+      currentSongLyrics: state.getIn(['player', 'currentSongLyrics']),
+      playMusicsList: state.getIn(['player', 'playMusicsList']),
+    }),
+  );
 
   const currentSong = playMusicsList[currentSongIndex];
+
   const audioRef = useRef();
   const [currentTime, setCurrentTime] = useState(0);
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
   useEffect(() => {
-    audioRef.current.src = getPlayerSongUrl(currentSong?.id);
+    if (currentSong?.id) {
+      audioRef.current.src = getPlayerSongUrl(currentSong?.id);
+      dispatch(getChangeCurrentSongLyricsAction(currentSong?.id));
+    }
     isPlayingFlag && audioRef.current.play();
   }, [currentSong]);
 
@@ -34,11 +44,23 @@ export default function WYAppPlayerBar() {
     setIsPlayingFlag(!isPlayingFlag);
   }, [isPlayingFlag]);
   const handleTimeUpdate = (e) => {
-    const audioCurrentTime = e.target.currentTime * 1000;
+    const audioCurrentTime = e.target.currentTime * 1000; // 毫秒
     // console.log(audioCurrentTime);
     !isHandleChangeFlag && setCurrentTime(audioCurrentTime);
     // fmtDuration === fmtCurrentTime && setIsPlayingFlag(false);
     // console.log(fmtCurrentTime);
+
+    // 歌词显示
+    // console.log(currentSongLyrics);
+    const currentLyricIndex =
+      currentSongLyrics.findIndex((item) => audioCurrentTime < item.time) - 1;
+    // console.log(currentLyricIndex);
+    message.open({
+      key: 'lyric',
+      className: 'lyric-message',
+      duration: 0,
+      content: currentSongLyrics[currentLyricIndex].content,
+    });
   };
   const handleMusicEnded = () => {
     setIsPlayingFlag(false);

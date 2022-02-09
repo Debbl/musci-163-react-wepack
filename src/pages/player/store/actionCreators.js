@@ -1,5 +1,6 @@
 import * as actionTypes from './constants';
-import { getSongDetail } from '@/services/player';
+import { getSongDetail, getSongLyrics } from '@/services/player';
+import { parseLyrics } from '@/utils/lyrics-parse';
 
 // 添加歌曲到播放列表 action
 const addItemToPlayMusicsListAction = (item) => ({
@@ -32,4 +33,23 @@ const getChangeCurrentSongIndexAction = (index) => {
   };
 };
 
-export { getAddItemToPlayMusicsListAction, getChangeCurrentSongIndexAction };
+// 当前播放歌曲的歌词
+const changeCurrentSongLyricsAction = (lyrics) => ({
+  type: actionTypes.CHANGE_CURRENT_SONG_LYRICS,
+  lyrics,
+});
+
+const getChangeCurrentSongLyricsAction = (id) => {
+  return (dispatch) => {
+    getSongLyrics(id).then((res) => {
+      const lyrics = parseLyrics(res.lrc.lyric);
+      dispatch(changeCurrentSongLyricsAction(lyrics));
+    });
+  };
+};
+
+export {
+  getAddItemToPlayMusicsListAction,
+  getChangeCurrentSongIndexAction,
+  getChangeCurrentSongLyricsAction,
+};

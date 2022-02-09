@@ -8,5 +8,13 @@ function getSongDetail(ids) {
     },
   });
 }
+function getSongLyrics(id) {
+  return request({
+    url: '/lyric',
+    params: {
+      id,
+    },
+  });
+}
 
-export { getSongDetail };
+export { getSongDetail, getSongLyrics };

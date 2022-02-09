@@ -50,3 +50,17 @@
   text-indent: -9999px;
   background: url(../images/sprite_cover.png) no-repeat -145px -57px;
 }
+
+/* 歌词显示 */
+.ant-message .lyric-message {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.ant-message .lyric-message .ant-message-notice-content {
+  color: #fff;
+  background: rgba(0, 0, 0, .5);
+}
