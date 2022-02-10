@@ -26,6 +26,7 @@ export default function WYAppPlayerBar() {
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
   useEffect(() => {
+    // console.log('currentSong 改变了。。。');
     if (currentSong?.id) {
       audioRef.current.src = getPlayerSongUrl(currentSong?.id);
       dispatch(getChangeCurrentSongLyricsAction(currentSong?.id));

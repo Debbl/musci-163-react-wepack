@@ -14,7 +14,6 @@ export default function WYTopRanking({ info }) {
 
   const { tracks = [] } = info;
   const addItemToPlayList = (ids) => {
-    console.log('点击了');
     dispatch(getAddItemToPlayMusicsListAction(ids));
   };
   return (
