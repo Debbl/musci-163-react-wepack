@@ -1,0 +1,56 @@
+.wy-app-player-panel {
+  position: fixed;
+  width: 986px;
+  height: 301px;
+  left: 0;
+  right: 0;
+  bottom: 46px;
+  margin: 0 auto;
+  color: #e2e2e2;
+  .header {
+    display: flex;
+    align-items: center;
+    height: 41px;
+    background: url('@/assets/images/playpanel_bg.png') 0 0;
+    .header-left {
+      padding-left: 30px;
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+    .header-right {
+      flex: 1;
+      text-align: center;
+    }
+  }
+  .main {
+    display: flex;
+    height: 260px;
+    background: url('@/assets/images/playpanel_bg.png') -1014px 0 repeat-y;
+    .main-left {
+      flex: 1;
+      width: 553px;
+      .play-list {
+        display: flex;
+        padding-left: 30px;
+        span {
+          flex: 1;
+        }
+        &:global(.active-song) {
+          color: #fff;
+          background-color: #000;
+        }
+      }
+    }
+    .main-right {
+      flex: 1;
+      overflow: scroll;
+      .lyc-item {
+        text-align: center;
+      }
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}

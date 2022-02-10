@@ -8,6 +8,7 @@ import {
   getChangeCurrentSongLyricsAction,
 } from '../store/actionCreators';
 import { getPlayerSongUrl, formatDate } from '@/utils/format-utils';
+import WYAppPlayerPanel from '../app-player-panel';
 
 export default function WYAppPlayerBar() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function WYAppPlayerBar() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
+  const [isShowPanel, setIsShowPanel] = useState(false); // 歌曲列表面板显示
   useEffect(() => {
     // console.log('currentSong 改变了。。。');
     if (currentSong?.id) {
@@ -165,7 +167,10 @@ export default function WYAppPlayerBar() {
             ></button>
             <button
               className={`${style['btn']} ${style['playlist']} sprite-player`}
-            ></button>
+              onClick={() => setIsShowPanel(!isShowPanel)}
+            >
+              {playMusicsList.length}
+            </button>
           </div>
         </div>
       </div>
@@ -174,6 +179,7 @@ export default function WYAppPlayerBar() {
         onTimeUpdate={(e) => handleTimeUpdate(e)}
         onEnded={handleMusicEnded}
       />
+      {isShowPanel && <WYAppPlayerPanel />}
     </div>
   );
 }

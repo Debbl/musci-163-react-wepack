@@ -103,6 +103,7 @@
         }
       }
       .right {
+        display: flex;
         width: 126px;
         padding-left: 13px;
         background-position: -147px -248px;
@@ -113,8 +114,11 @@
           background-position: -66px -248px;
         }
         .playlist {
+          text-align: center;
+          padding-left: 18px;
           width: 60px;
           background-position: -42px -68px;
+          color: #ccc;
         }
       }
     }
