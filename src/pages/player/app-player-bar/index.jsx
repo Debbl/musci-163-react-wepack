@@ -27,25 +27,53 @@ export default function WYAppPlayerBar() {
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
   const [isShowPanel, setIsShowPanel] = useState(false); // 歌曲列表面板显示
+  const [playSequence, setPlaySequence] = useState(0); // 歌曲播放顺序
+  const [isPlayEnd, setIsPlayEnd] = useState(false);
   useEffect(() => {
-    // console.log('currentSong 改变了。。。');
+    console.log('currentSong 改变了。。。');
+    setIsPlayEnd(false);
     if (currentSong?.id) {
       audioRef.current.src = getPlayerSongUrl(currentSong?.id);
       dispatch(getChangeCurrentSongLyricsAction(currentSong?.id));
     }
     isPlayingFlag && audioRef.current.play();
   }, [currentSong]);
+  useEffect(() => {
+    console.log(playSequence, 'isplayend');
+    if (isPlayEnd) {
+      setIsPlayingFlag(true);
+      switch (playSequence) {
+        case 0:
+          playMusic();
+          break;
+        case 1:
+          changeCurrentSongIndex(1);
+          break;
+        case 2:
+          var randomIndex = Math.floor(Math.random() * playMusicsList.length);
+          while (randomIndex === currentSongIndex) {
+            randomIndex = Math.floor(Math.random() * playMusicsList.length);
+          }
+          console.log(randomIndex);
+          dispatch(getChangeCurrentSongIndexAction(randomIndex));
+          break;
+        default:
+      }
+    }
+  }, [isPlayEnd]);
 
   const singerName = (currentSong?.ar && currentSong.ar[0].name) || '未知歌手';
   const durationTime = currentSong?.dt || 0;
   const fmtDuration = formatDate(durationTime, 'mm:ss');
   const fmtCurrentTime = formatDate(currentTime, 'mm:ss');
   const playMusic = useCallback(() => {
+    console.log('播放歌曲', isPlayingFlag);
+    setIsPlayEnd(false);
     !isPlayingFlag
       ? audioRef.current.play().catch(() => setIsPlayingFlag(false))
       : audioRef.current.pause();
     setIsPlayingFlag(!isPlayingFlag);
-  }, [isPlayingFlag]);
+  }, [isPlayingFlag, isPlayEnd]);
   const handleTimeUpdate = (e) => {
     const audioCurrentTime = e.target.currentTime * 1000; // 毫秒
     // console.log(audioCurrentTime);
@@ -68,6 +96,7 @@ export default function WYAppPlayerBar() {
   };
   const handleMusicEnded = () => {
     setIsPlayingFlag(false);
+    setIsPlayEnd(true);
   };
   const handleSliderChange = useCallback((value) => {
     setIsHandleChangeFlag(true);
@@ -76,6 +105,7 @@ export default function WYAppPlayerBar() {
   }, []);
   const handleSliderAfterChange = useCallback(
     (value) => {
+      console.log('滑块停止了');
       setIsHandleChangeFlag(false);
       // console.log(value / 1000);
       audioRef.current.currentTime = value / 1000;
@@ -85,8 +115,9 @@ export default function WYAppPlayerBar() {
     },
     [isPlayingFlag, playMusic],
   );
-  // 改变当前播放歌曲索引
+  // 改变当前播放歌曲索引 上一首 下一首
   const changeCurrentSongIndex = (step) => {
+    setIsPlayEnd(false);
     let index = currentSongIndex + step;
     // console.log(index);
     // console.log(playMusicsList.length, 'length');
@@ -97,7 +128,13 @@ export default function WYAppPlayerBar() {
       dispatch(getChangeCurrentSongIndexAction(index));
   };
 
-  // console.log('页面刷新。。。');
+  // 循环播放 顺序播放 随机播放
+  const changePlaySequence = () => {
+    setPlaySequence(playSequence + 1);
+    playSequence === 2 && setPlaySequence(0);
+    console.log(playSequence);
+  };
+  console.log('页面刷新。。。');
   return (
     <div className={`${style['wy-app-player-bar']} sprite-player`}>
       <div className={`${style['content']} wrap-v2`}>
@@ -164,6 +201,7 @@ export default function WYAppPlayerBar() {
             ></button>
             <button
               className={`${style['btn']} ${style['loop']} sprite-player`}
+              onClick={changePlaySequence}
             ></button>
             <button
               className={`${style['btn']} ${style['playlist']} sprite-player`}
