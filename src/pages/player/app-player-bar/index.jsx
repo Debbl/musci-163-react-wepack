@@ -60,7 +60,7 @@ export default function WYAppPlayerBar() {
         default:
       }
     }
-  }, [isPlayEnd]);
+  }, [isPlayEnd, playSequence]);
 
   const singerName = (currentSong?.ar && currentSong.ar[0].name) || '未知歌手';
   const durationTime = currentSong?.dt || 0;
@@ -75,6 +75,7 @@ export default function WYAppPlayerBar() {
     setIsPlayingFlag(!isPlayingFlag);
   }, [isPlayingFlag, isPlayEnd]);
   const handleTimeUpdate = (e) => {
+    console.log('歌曲在播放，时间更新', isHandleChangeFlag);
     const audioCurrentTime = e.target.currentTime * 1000; // 毫秒
     // console.log(audioCurrentTime);
     !isHandleChangeFlag && setCurrentTime(audioCurrentTime);
@@ -95,6 +96,8 @@ export default function WYAppPlayerBar() {
       });
   };
   const handleMusicEnded = () => {
+    console.log('播放结束了');
+    setIsHandleChangeFlag(false);
     setIsPlayingFlag(false);
     setIsPlayEnd(true);
   };
@@ -123,7 +126,8 @@ export default function WYAppPlayerBar() {
     // console.log(playMusicsList.length, 'length');
     if (index < 0) index = 0;
     if (index > playMusicsList.length - 1) index = playMusicsList.length - 1;
-    // console.log(index);
+    console.log(index);
+    console.log(currentSongIndex);
     index !== currentSongIndex &&
       dispatch(getChangeCurrentSongIndexAction(index));
   };
