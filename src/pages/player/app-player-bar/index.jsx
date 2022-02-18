@@ -23,6 +23,7 @@ export default function WYAppPlayerBar() {
   const currentSong = playMusicsList[currentSongIndex];
 
   const audioRef = useRef();
+  const sliderRef = useRef();
   const [currentTime, setCurrentTime] = useState(0);
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
@@ -75,6 +76,7 @@ export default function WYAppPlayerBar() {
     setIsPlayingFlag(!isPlayingFlag);
   }, [isPlayingFlag, isPlayEnd]);
   const handleTimeUpdate = (e) => {
+    debugger;
     console.log('歌曲在播放，时间更新', isHandleChangeFlag);
     const audioCurrentTime = e.target.currentTime * 1000; // 毫秒
     // console.log(audioCurrentTime);
@@ -97,18 +99,28 @@ export default function WYAppPlayerBar() {
   };
   const handleMusicEnded = () => {
     console.log('播放结束了');
+    debugger;
     setIsHandleChangeFlag(false);
     setIsPlayingFlag(false);
     setIsPlayEnd(true);
   };
-  const handleSliderChange = useCallback((value) => {
-    setIsHandleChangeFlag(true);
-    // console.log('slider', value);
-    setCurrentTime(value);
-  }, []);
+  const handleSliderChange = useCallback(
+    (value) => {
+      debugger;
+      console.log(
+        '滑块改变了------------------------------------------------>>',
+        value,
+      );
+      !isPlayEnd && setIsHandleChangeFlag(true);
+      // console.log('slider', value);
+      setCurrentTime(value);
+    },
+    [isPlayEnd],
+  );
   const handleSliderAfterChange = useCallback(
     (value) => {
       console.log('滑块停止了');
+      sliderRef.current.blur();
       setIsHandleChangeFlag(false);
       // console.log(value / 1000);
       audioRef.current.currentTime = value / 1000;
@@ -138,7 +150,7 @@ export default function WYAppPlayerBar() {
     playSequence === 2 && setPlaySequence(0);
     console.log(playSequence);
   };
-  console.log('页面刷新。。。');
+  console.log('页面刷新。。。', currentTime);
   return (
     <div className={`${style['wy-app-player-bar']} sprite-player`}>
       <div className={`${style['content']} wrap-v2`}>
@@ -174,6 +186,7 @@ export default function WYAppPlayerBar() {
             </div>
             <div className={style['progress']}>
               <Slider
+                ref={sliderRef}
                 min={0}
                 max={durationTime}
                 defaultValue={0}
@@ -204,7 +217,11 @@ export default function WYAppPlayerBar() {
               className={`${style['btn']} ${style['volume']} sprite-player`}
             ></button>
             <button
-              className={`${style['btn']} ${style['loop']} sprite-player`}
+              className={`${style['btn']} ${
+                playSequence === 0 ? style['loop-loop'] : ''
+              }${playSequence === 1 ? style['loop-order'] : ''}${
+                playSequence === 2 ? style['loop-random'] : ''
+              } sprite-player`}
               onClick={changePlaySequence}
             ></button>
             <button

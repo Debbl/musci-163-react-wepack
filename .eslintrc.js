@@ -26,5 +26,6 @@ module.exports = {
     'prettier/prettier': 'warn',
     'array-element-newline': ['error', 'consistent'],
     'no-unused-vars': 'warn',
+    'no-debugger': 'warn',
   },
 };
