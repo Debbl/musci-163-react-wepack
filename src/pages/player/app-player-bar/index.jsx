@@ -76,7 +76,6 @@ export default function WYAppPlayerBar() {
     setIsPlayingFlag(!isPlayingFlag);
   }, [isPlayingFlag, isPlayEnd]);
   const handleTimeUpdate = (e) => {
-    debugger;
     console.log('歌曲在播放，时间更新', isHandleChangeFlag);
     const audioCurrentTime = e.target.currentTime * 1000; // 毫秒
     // console.log(audioCurrentTime);
@@ -99,14 +98,12 @@ export default function WYAppPlayerBar() {
   };
   const handleMusicEnded = () => {
     console.log('播放结束了');
-    debugger;
     setIsHandleChangeFlag(false);
     setIsPlayingFlag(false);
     setIsPlayEnd(true);
   };
   const handleSliderChange = useCallback(
     (value) => {
-      debugger;
       console.log(
         '滑块改变了------------------------------------------------>>',
         value,
