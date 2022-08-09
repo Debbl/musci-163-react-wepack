@@ -17,18 +17,18 @@ function getHotRecommend(limit) {
 
 function getNewAlbums(limit) {
   return request({
-    url: '/top/album',
+    url: '/album/new',
     params: {
       limit,
     },
   });
 }
 
-function getTopList(idx) {
+function getTopList(id) {
   return request({
-    url: '/top/list',
+    url: '/playlist/detail',
     params: {
-      idx,
+      id,
     },
   });
 }
