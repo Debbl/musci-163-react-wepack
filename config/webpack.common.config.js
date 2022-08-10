@@ -12,7 +12,7 @@ const getWebpackCommonConfig = (isEnvDevelopment, isEnvProduction) => ({
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: 'static/js/[name].[contenthash:8].bundle.js',
-    chunkFilename: '[id].[name].chunk.js',
+    chunkFilename: 'static/js/[name].chunk.js',
     publicPath: '/',
     clean: true,
   },

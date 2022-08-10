@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { useRoutes, Navigate } from 'react-router-dom';
 
-import WYDiscover from '@/pages/discover';
-import WYFriend from '@/pages/friend';
-import WYMine from '@/pages/mine';
-import WYRecommend from '@/pages/discover/c-pages/recommend';
-import WYRanking from '@/pages/discover/c-pages/ranking';
-import WYSongs from '@/pages/discover/c-pages/songs';
-import WYDjradio from '@/pages/discover/c-pages/djradio';
-import WYArtist from '@/pages/discover/c-pages/artist';
-import WYAlbum from '@/pages/discover/c-pages/album';
+const WYDiscover = lazy(() => import('@/pages/discover'));
+const WYFriend = lazy(() => import('@/pages/friend'));
+const WYMine = lazy(() => import('@/pages/mine'));
+const WYRecommend = lazy(() => import('@/pages/discover/c-pages/recommend'));
+const WYRanking = lazy(() => import('@/pages/discover/c-pages/ranking'));
+const WYSongs = lazy(() => import('@/pages/discover/c-pages/songs'));
+const WYDjradio = lazy(() => import('@/pages/discover/c-pages/djradio'));
+const WYArtist = lazy(() => import('@/pages/discover/c-pages/artist'));
+const WYAlbum = lazy(() => import('@/pages/discover/c-pages/album'));
 
 function AppRoutes() {
   const AppRoutes = useRoutes([
