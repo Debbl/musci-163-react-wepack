@@ -31,7 +31,7 @@ export default function WYAppPlayerBar() {
   const [playSequence, setPlaySequence] = useState(0); // 歌曲播放顺序
   const [isPlayEnd, setIsPlayEnd] = useState(false);
   useEffect(() => {
-    console.log('currentSong 改变了。。。');
+    // console.log('currentSong 改变了。。。');
     setIsPlayEnd(false);
     if (currentSong?.id) {
       audioRef.current.src = getPlayerSongUrl(currentSong?.id);
@@ -104,10 +104,10 @@ export default function WYAppPlayerBar() {
   };
   const handleSliderChange = useCallback(
     (value) => {
-      console.log(
-        '滑块改变了------------------------------------------------>>',
-        value,
-      );
+      // console.log(
+      //   '滑块改变了------------------------------------------------>>',
+      //   value,
+      // );
       !isPlayEnd && setIsHandleChangeFlag(true);
       // console.log('slider', value);
       setCurrentTime(value);
@@ -147,7 +147,7 @@ export default function WYAppPlayerBar() {
     playSequence === 2 && setPlaySequence(0);
     console.log(playSequence);
   };
-  console.log('页面刷新。。。', currentTime);
+  // console.log('页面刷新。。。', currentTime);
   return (
     <div className={`${style['wy-app-player-bar']} sprite-player`}>
       <div className={`${style['content']} wrap-v2`}>

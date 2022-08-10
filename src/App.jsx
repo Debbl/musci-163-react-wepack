@@ -8,16 +8,14 @@ import WYAppHeader from '@/components/app-header';
 import WYAppFooter from '@/components/app-footer';
 import WYAppPlayerBar from '@/pages/player/app-player-bar';
 
-import { message } from 'antd';
+import Loading from './components/loading';
 
 export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <WYAppHeader />
-        <Suspense
-          fallback={message.loading({ content: 'loading', key: 'loading' })}
-        >
+        <Suspense fallback={<Loading />}>
           <AppRoutes />
         </Suspense>
         <WYAppFooter />

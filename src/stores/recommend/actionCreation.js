@@ -40,7 +40,7 @@ const changeNewAlbumAction = (res) => ({
 const getNewAlbumAction = (limit) => {
   return (dispatch) => {
     getNewAlbums(limit).then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch(changeNewAlbumAction(res));
     });
   };
