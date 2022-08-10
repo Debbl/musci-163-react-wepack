@@ -6,7 +6,7 @@ const webpackProdConfig = {
   mode: 'production',
   devtool: false,
   output: {
-    publicPath: './',
+    publicPath: '/',
   },
   optimization: {
     minimizer: [new CssMinimizerPlugin()],
