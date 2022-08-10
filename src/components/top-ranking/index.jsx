@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import style from './style.module.scss';
-import { getAddItemToPlayMusicsListAction } from '../../pages/player/store/actionCreators';
+import { getAddItemToPlayMusicsListAction } from '@/stores/player/actionCreators';
 
 WYTopRanking.propTypes = {
   info: PropTypes.object,

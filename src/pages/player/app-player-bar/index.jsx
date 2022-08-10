@@ -6,7 +6,7 @@ import style from './style.module.scss';
 import {
   getChangeCurrentSongIndexAction,
   getChangeCurrentSongLyricsAction,
-} from '../store/actionCreators';
+} from '@/stores/player/actionCreators';
 import { getPlayerSongUrl, formatDate } from '@/utils/format-utils';
 import WYAppPlayerPanel from '../app-player-panel';
 

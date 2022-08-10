@@ -4,7 +4,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { Carousel } from 'antd';
 
 import style from './style.module.scss';
-import { getTopBannersAction } from '@/pages/discover/c-pages/recommend/store/actionCreation';
+import { getTopBannersAction } from '@/stores/recommend/actionCreation';
 
 export default function WYTopBanners() {
   const dispatch = useDispatch();

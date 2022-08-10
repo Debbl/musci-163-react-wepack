@@ -3,9 +3,9 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Carousel } from 'antd';
 
 import style from './style.module.scss';
-import { getNewAlbumAction } from '../../store/actionCreation';
+import { getNewAlbumAction } from '@/stores/recommend/actionCreation';
 import WYThemeHeaderRCM from '@/components/theme-header-rcm';
-import WYAlbumCover from '../../../../../../components/album-cover';
+import WYAlbumCover from '@/components/album-cover';
 
 export default function WYNewAlbum() {
   const dispatch = useDispatch();

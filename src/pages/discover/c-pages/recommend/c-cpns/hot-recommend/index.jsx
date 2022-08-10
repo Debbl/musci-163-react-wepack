@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import style from './style.module.scss';
 import { HOT_RECOMMEND_LIMIT } from '@/common/constants';
-import { getHotRecommendAction } from '../../store/actionCreation';
+import { getHotRecommendAction } from '@/stores/recommend/actionCreation';
 import WYThemeHeaderRCM from '@/components/theme-header-rcm';
 import WYSongsCover from '@/components/songs-cover';
 

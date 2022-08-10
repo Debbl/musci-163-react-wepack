@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import style from './style.module.scss';
-import { getTopListAction } from '../../store/actionCreation';
+import { getTopListAction } from '@/stores/recommend/actionCreation';
 import WYThemeHeaderRCM from '@/components/theme-header-rcm';
 import WYTopRanking from '@/components/top-ranking';
 

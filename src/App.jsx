@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import store from '@/store';
+import store from '@/stores';
 import AppRoutes from '@/router';
 import WYAppHeader from '@/components/app-header';
 import WYAppFooter from '@/components/app-footer';
