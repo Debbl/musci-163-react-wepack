@@ -12,12 +12,12 @@ const addItemToPlayMusicsListAction = (item) => ({
 const getAddItemToPlayMusicsListAction = (ids) => {
   return (dispatch, getState) => {
     const playMusicsList = getState().getIn(['player', 'playMusicsList']);
-    getSongDetail(ids).then((res) => {
-      const musicItem = playMusicsList.find((item) => item.id === ids)
-        ? null
-        : res.songs[0];
-      musicItem && dispatch(addItemToPlayMusicsListAction(musicItem));
-    });
+    const isDispatch = !playMusicsList.find((item) => item.id === ids);
+    console.log(isDispatch);
+    isDispatch &&
+      getSongDetail(ids).then((res) => {
+        dispatch(addItemToPlayMusicsListAction(res.songs[0]));
+      });
   };
 };
 
