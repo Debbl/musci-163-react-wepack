@@ -41,6 +41,10 @@
   background: url(../images/playbar_sprite.png) no-repeat 0 9999px;
 }
 
+.sprite-button {
+  background: url(../images/sprite_button.png) no-repeat 0 9999px;
+}
+
 .image-cover {
   position: absolute;
   left: 0;

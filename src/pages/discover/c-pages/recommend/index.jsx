@@ -6,6 +6,7 @@ import WYTopBanners from './c-cpns/top-banners';
 import WYNewAlbum from './c-cpns/new-album';
 import WYRecommendRanking from './c-cpns/recommend-ranking';
 import UserProfile from './c-cpns/user-profile';
+import SingerInfo from './c-cpns/singer-info';
 
 export default function WYRecommend() {
   return (
@@ -19,6 +20,7 @@ export default function WYRecommend() {
         </div>
         <div className={style.right}>
           <UserProfile />
+          <SingerInfo />
         </div>
       </div>
     </div>
