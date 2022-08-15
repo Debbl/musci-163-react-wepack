@@ -42,7 +42,7 @@ export default function WYAppPlayerPanel() {
         </div>
         <div className={style['main-right']}>
           {currentSongLyrics.map((item) => (
-            <div key={item.time} className={style['lyc-item']}>
+            <div key={item.time + item.content} className={style['lyc-item']}>
               {item.content}
             </div>
           ))}

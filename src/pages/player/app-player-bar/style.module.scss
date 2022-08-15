@@ -89,12 +89,15 @@
     .operator {
       display: flex;
       width: 200px;
+      align-items: center;
       .btn {
         width: 25px;
         height: 25px;
         cursor: pointer;
       }
       .left {
+        display: flex;
+        align-items: center;
         .favor {
           background-position: -88px -163px;
         }
