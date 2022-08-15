@@ -10,6 +10,8 @@ import WYAppPlayerBar from '@/pages/player/app-player-bar';
 
 import Loading from './components/loading';
 
+console.log('GitHub', 'https://github.com/Debbl/music-163-react-webpack');
+
 export default function App() {
   return (
     <Provider store={store}>
