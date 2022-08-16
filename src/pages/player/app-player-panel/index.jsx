@@ -1,8 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import style from './style.module.scss';
 import { formatDate } from '@/utils/format-utils';
+import {
+  changeCurrentSongAction,
+  changeCurrentSongIndexAction,
+} from '@/stores/player/actionCreators';
 
 export default function WYAppPlayerPanel() {
   const { playMusicsList, currentSongIndex, currentSongLyrics } = useSelector(
@@ -12,8 +16,14 @@ export default function WYAppPlayerPanel() {
       currentSongLyrics: state.getIn(['player', 'currentSongLyrics']),
     }),
   );
+  const dispatch = useDispatch();
 
   const currentSong = playMusicsList[currentSongIndex];
+
+  function playListClick(song, index) {
+    dispatch(changeCurrentSongAction(song));
+    dispatch(changeCurrentSongIndexAction(index));
+  }
 
   return (
     <div className={style['wy-app-player-panel']}>
@@ -33,6 +43,7 @@ export default function WYAppPlayerPanel() {
               className={`${style['play-list']}${
                 index === currentSongIndex ? ' active-song' : ''
               }`}
+              onClick={() => playListClick(song, index)}
             >
               <span className={style['play-icon']}>
                 <i></i>

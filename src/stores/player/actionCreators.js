@@ -92,4 +92,6 @@ export {
   getChangeCurrentSongLyricsAction,
   getChangePlaySequenceAction,
   getChangeCurrentSongIndexAndSongAction,
+  changeCurrentSongIndexAction,
+  changeCurrentSongAction,
 };

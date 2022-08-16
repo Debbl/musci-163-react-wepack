@@ -35,7 +35,8 @@ export default function WYAppPlayerBar() {
       audioRef.current.src = getPlayerSongUrl(currentSong?.id);
       dispatch(getChangeCurrentSongLyricsAction(currentSong?.id));
     }
-    isPlayingFlag && audioRef.current.play();
+    audioRef.current.play();
+    setIsPlayingFlag(true);
   }, [currentSong]);
 
   const singerName = (currentSong?.ar && currentSong.ar[0].name) || '未知歌手';
@@ -95,7 +96,7 @@ export default function WYAppPlayerBar() {
       !isPlayingFlag && playMusic();
       sliderRef.current.blur();
     },
-    [isPlayingFlag, playMusic, sliderRef.current],
+    [isPlayingFlag, playMusic],
   );
   // 改变当前播放歌曲索引 上一首 下一首
   const changeCurrentSongIndex = (step) => {
