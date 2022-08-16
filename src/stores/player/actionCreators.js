@@ -42,12 +42,11 @@ const getChangeCurrentSongIndexAndSongAction = (step) => {
     const playSequence = getState().getIn(['player', 'playSequence']);
     let nextSongIndex = currentSongIndex;
     switch (playSequence) {
+      case actionTypes.SEQUENCE_LOOP:
       case actionTypes.SEQUENCE_ORDER:
         nextSongIndex = nextSongIndex + step;
         if (nextSongIndex < 0) nextSongIndex = playMusicsList.length;
         if (nextSongIndex >= playMusicsList.length) nextSongIndex = 0;
-        break;
-      case actionTypes.SEQUENCE_LOOP:
         break;
       case actionTypes.SEQUENCE_RANDOM:
         nextSongIndex = getRandomNumber(playMusicsList.length);
