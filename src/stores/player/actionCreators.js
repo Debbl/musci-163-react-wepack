@@ -60,6 +60,11 @@ const getChangeCurrentSongIndexAndSongAction = (step) => {
   };
 };
 
+const changeCurrentLyricIndex = (currentLyricIndex) => ({
+  type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
+  currentLyricIndex,
+});
+
 // 当前播放歌曲的歌词
 const changeCurrentSongLyricsAction = (lyrics) => ({
   type: actionTypes.CHANGE_CURRENT_SONG_LYRICS,
@@ -94,4 +99,5 @@ export {
   getChangeCurrentSongIndexAndSongAction,
   changeCurrentSongIndexAction,
   changeCurrentSongAction,
+  changeCurrentLyricIndex,
 };

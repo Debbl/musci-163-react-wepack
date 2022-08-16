@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import style from './style.module.scss';
@@ -9,21 +9,41 @@ import {
 } from '@/stores/player/actionCreators';
 
 export default function WYAppPlayerPanel() {
-  const { playMusicsList, currentSongIndex, currentSongLyrics } = useSelector(
-    (state) => ({
-      playMusicsList: state.getIn(['player', 'playMusicsList']),
-      currentSongIndex: state.getIn(['player', 'currentSongIndex']),
-      currentSongLyrics: state.getIn(['player', 'currentSongLyrics']),
-    }),
-  );
+  const {
+    playMusicsList,
+    currentSongIndex,
+    currentSong,
+    currentLyricIndex,
+    currentSongLyrics,
+  } = useSelector((state) => ({
+    playMusicsList: state.getIn(['player', 'playMusicsList']),
+    currentSong: state.getIn(['player', 'currentSong']),
+    currentSongIndex: state.getIn(['player', 'currentSongIndex']),
+    currentLyricIndex: state.getIn(['player', 'currentLyricIndex']),
+    currentSongLyrics: state.getIn(['player', 'currentSongLyrics']),
+  }));
   const dispatch = useDispatch();
-
-  const currentSong = playMusicsList[currentSongIndex];
 
   function playListClick(song, index) {
     dispatch(changeCurrentSongAction(song));
     dispatch(changeCurrentSongIndexAction(index));
   }
+
+  // 歌词滚动
+  const lyrContainerRef = useRef();
+  function lyrScrollTo(element, to, duration) {
+    if (duration <= 0 || to <= 0) return;
+    const difference = to - element.scrollTop;
+    const perTick = (difference / duration) * 10;
+    setTimeout(() => {
+      element.scrollTop = element.scrollTop + perTick;
+      if (element.scrollTop === to) return;
+      lyrScrollTo(element, to, duration - 10);
+    }, 10);
+  }
+  useEffect(() => {
+    lyrScrollTo(lyrContainerRef.current, (currentLyricIndex - 3) * 32, 1000);
+  }, [currentLyricIndex]);
 
   return (
     <div className={style['wy-app-player-panel']}>
@@ -65,9 +85,14 @@ export default function WYAppPlayerPanel() {
         </div>
         <div className={style['main-line']}></div>
         <div className={style['main-right']}>
-          <div className={style['lyc-container']}>
-            {currentSongLyrics.map((item) => (
-              <div key={item.time + item.content} className={style['lyc-item']}>
+          <div className={style['lyr-container']} ref={lyrContainerRef}>
+            {currentSongLyrics.map((item, index) => (
+              <div
+                key={item.time + item.content}
+                className={`${style['lyr-item']} ${
+                  index === currentLyricIndex && style['lyr-active']
+                }`}
+              >
                 {item.content}
               </div>
             ))}

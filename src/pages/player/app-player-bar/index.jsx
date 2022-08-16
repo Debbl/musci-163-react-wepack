@@ -4,6 +4,7 @@ import { Slider, message } from 'antd';
 
 import style from './style.module.scss';
 import {
+  changeCurrentLyricIndex,
   getChangeCurrentSongIndexAndSongAction,
   getChangeCurrentSongLyricsAction,
   getChangePlaySequenceAction,
@@ -14,13 +15,19 @@ import { SEQUENCE_LOOP } from '@/stores/player/constants';
 
 export default function WYAppPlayerBar() {
   const dispatch = useDispatch();
-  const { currentSong, currentSongLyrics, playMusicsList, playSequence } =
-    useSelector((state) => ({
-      currentSongLyrics: state.getIn(['player', 'currentSongLyrics']),
-      playMusicsList: state.getIn(['player', 'playMusicsList']),
-      playSequence: state.getIn(['player', 'playSequence']),
-      currentSong: state.getIn(['player', 'currentSong']),
-    }));
+  const {
+    currentSong,
+    currentLyricIndex,
+    currentSongLyrics,
+    playMusicsList,
+    playSequence,
+  } = useSelector((state) => ({
+    currentLyricIndex: state.getIn(['player', 'currentLyricIndex']),
+    currentSongLyrics: state.getIn(['player', 'currentSongLyrics']),
+    playMusicsList: state.getIn(['player', 'playMusicsList']),
+    playSequence: state.getIn(['player', 'playSequence']),
+    currentSong: state.getIn(['player', 'currentSong']),
+  }));
 
   const audioRef = useRef();
   const sliderRef = useRef();
@@ -56,16 +63,17 @@ export default function WYAppPlayerBar() {
     const audioCurrentTime = e.target.currentTime * 1000; // 毫秒
     // console.log(audioCurrentTime);
     !isHandleChangeFlag && setCurrentTime(audioCurrentTime);
-    let currentLyricIndex =
+    let nextLyricIndex =
       currentSongLyrics.findIndex((item) => audioCurrentTime < item.time) - 1;
-    if (currentLyricIndex === -2)
-      currentLyricIndex = currentSongLyrics.length - 1;
-    currentSongLyrics[currentLyricIndex]?.content &&
+    if (nextLyricIndex === -2) nextLyricIndex = currentSongLyrics.length - 1;
+    if (nextLyricIndex === currentLyricIndex) return; // 不更新歌词
+    dispatch(changeCurrentLyricIndex(nextLyricIndex));
+    currentSongLyrics[nextLyricIndex]?.content &&
       message.open({
         key: 'lyric',
         className: 'lyric-message',
         duration: 0,
-        content: currentSongLyrics[currentLyricIndex]?.content,
+        content: currentSongLyrics[nextLyricIndex]?.content,
       });
   };
   const handleMusicEnded = () => {
