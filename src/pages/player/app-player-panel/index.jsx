@@ -34,18 +34,33 @@ export default function WYAppPlayerPanel() {
                 index === currentSongIndex ? ' active-song' : ''
               }`}
             >
-              <span className="text-nowrap">{song.name}</span>
-              <span>{song.ar[0].name}</span>
-              <span>{formatDate(song.dt, 'mm:ss')}</span>
+              <span className={style['play-icon']}>
+                <i></i>
+              </span>
+              <span className={`${style['song-name']} text-nowrap`}>
+                {song.name}
+              </span>
+              <span className={`${style['singer-name']} text-nowrap`}>
+                {song.ar[0].name}
+              </span>
+              <span className={style['song-time']}>
+                {formatDate(song.dt, 'mm:ss')}
+              </span>
+              <span className={style['song-link-icon']}>
+                <a href="/"></a>
+              </span>
             </div>
           ))}
         </div>
+        <div className={style['main-line']}></div>
         <div className={style['main-right']}>
-          {currentSongLyrics.map((item) => (
-            <div key={item.time + item.content} className={style['lyc-item']}>
-              {item.content}
-            </div>
-          ))}
+          <div className={style['lyc-container']}>
+            {currentSongLyrics.map((item) => (
+              <div key={item.time + item.content} className={style['lyc-item']}>
+                {item.content}
+              </div>
+            ))}
+          </div>
         </div>
       </main>
     </div>
