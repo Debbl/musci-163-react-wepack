@@ -71,7 +71,7 @@ export default function WYAppPlayerBar() {
     currentSongLyrics[nextLyricIndex]?.content &&
       message.open({
         key: 'lyric',
-        className: 'lyric-message',
+        className: isShowPanel ? 'lyric-none' : 'lyric-message',
         duration: 0,
         content: currentSongLyrics[nextLyricIndex]?.content,
       });

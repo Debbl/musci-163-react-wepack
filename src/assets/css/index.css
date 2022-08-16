@@ -64,6 +64,10 @@
   margin: 0 auto;
 }
 
+.ant-message .lyric-none {
+  display: none;
+}
+
 .ant-message .lyric-message .ant-message-notice-content {
   color: #fff;
   background: rgba(0, 0, 0, .5);
