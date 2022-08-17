@@ -41,9 +41,9 @@ export default function WYAppPlayerBar() {
     if (currentSong?.id) {
       audioRef.current.src = getPlayerSongUrl(currentSong?.id);
       dispatch(getChangeCurrentSongLyricsAction(currentSong?.id));
+      audioRef.current.play();
+      setIsPlayingFlag(true);
     }
-    audioRef.current.play();
-    setIsPlayingFlag(true);
   }, [currentSong]);
 
   const singerName = (currentSong?.ar && currentSong.ar[0].name) || '未知歌手';
