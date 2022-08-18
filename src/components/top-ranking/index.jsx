@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import style from './style.module.scss';
-import { getAddItemToPlayMusicsListAction } from '@/stores/player/actionCreators';
+import {
+  getAddItemAndPlayAction,
+  getAddItemToPlayMusicsListAction,
+} from '@/stores/player/actionCreators';
 
 WYTopRanking.propTypes = {
   info: PropTypes.object,
@@ -15,6 +18,10 @@ export default function WYTopRanking({ info }) {
   const { tracks = [] } = info;
   const addItemToPlayList = (ids) => {
     dispatch(getAddItemToPlayMusicsListAction(ids));
+  };
+  // 榜单页面点击播放
+  const addItemAndPlay = (ids) => {
+    dispatch(getAddItemAndPlayAction(ids));
   };
   return (
     <div className={style['wy-top-ranking']}>
@@ -45,6 +52,7 @@ export default function WYTopRanking({ info }) {
               <div className={style['operate']}>
                 <button
                   className={`${style['btn']} ${style['play']} sprite-02`}
+                  onClick={() => addItemAndPlay(item.id)}
                 ></button>
                 <button
                   className={`${style['btn']} ${style['addto']} sprite-icon2`}

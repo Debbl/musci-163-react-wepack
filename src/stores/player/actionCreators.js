@@ -60,6 +60,25 @@ const getChangeCurrentSongIndexAndSongAction = (step) => {
   };
 };
 
+// 榜单页面点击播放
+const getAddItemAndPlayAction = (ids) => {
+  return (dispatch, getState) => {
+    const playMusicsList = getState().getIn(['player', 'playMusicsList']);
+    const index = playMusicsList.findIndex((item) => item.id === ids);
+    if (index === -1) {
+      getSongDetail(ids).then((res) => {
+        const newPlayMusicList = [...playMusicsList, res.songs[0]];
+        dispatch(changePlayMusicListAction(newPlayMusicList));
+        dispatch(changeCurrentSongAction(res.songs[0]));
+        dispatch(changeCurrentSongIndexAction(playMusicsList.length));
+      });
+    } else {
+      dispatch(changeCurrentSongIndexAction(index));
+      dispatch(changeCurrentSongAction(playMusicsList[index]));
+    }
+  };
+};
+
 const changeCurrentLyricIndex = (currentLyricIndex) => ({
   type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
   currentLyricIndex,
@@ -92,12 +111,20 @@ const getChangePlaySequenceAction = (sequence) => {
   };
 };
 
+//
+const changeIsShowPanel = (isShowPanel) => ({
+  type: actionTypes.CHANGE_IS_SHOW_PANEL,
+  isShowPanel,
+});
+
 export {
   getAddItemToPlayMusicsListAction,
   getChangeCurrentSongLyricsAction,
   getChangePlaySequenceAction,
   getChangeCurrentSongIndexAndSongAction,
+  getAddItemAndPlayAction,
   changeCurrentSongIndexAction,
   changeCurrentSongAction,
   changeCurrentLyricIndex,
+  changeIsShowPanel,
 };

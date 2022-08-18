@@ -5,6 +5,7 @@ import { Slider, message } from 'antd';
 import style from './style.module.scss';
 import {
   changeCurrentLyricIndex,
+  changeIsShowPanel,
   getChangeCurrentSongIndexAndSongAction,
   getChangeCurrentSongLyricsAction,
   getChangePlaySequenceAction,
@@ -21,12 +22,14 @@ export default function WYAppPlayerBar() {
     currentSongLyrics,
     playMusicsList,
     playSequence,
+    isShowPanel,
   } = useSelector((state) => ({
     currentLyricIndex: state.getIn(['player', 'currentLyricIndex']),
     currentSongLyrics: state.getIn(['player', 'currentSongLyrics']),
     playMusicsList: state.getIn(['player', 'playMusicsList']),
     playSequence: state.getIn(['player', 'playSequence']),
     currentSong: state.getIn(['player', 'currentSong']),
+    isShowPanel: state.getIn(['player', 'isShowPanel']),
   }));
 
   const audioRef = useRef();
@@ -34,7 +37,6 @@ export default function WYAppPlayerBar() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isHandleChangeFlag, setIsHandleChangeFlag] = useState(false);
   const [isPlayingFlag, setIsPlayingFlag] = useState(false);
-  const [isShowPanel, setIsShowPanel] = useState(false); // 歌曲列表面板显示
   const [isPlayEnd, setIsPlayEnd] = useState(false);
   useEffect(() => {
     setIsPlayEnd(false);
@@ -119,6 +121,10 @@ export default function WYAppPlayerBar() {
     dispatch(getChangePlaySequenceAction(nextSequence));
   };
 
+  const switchShowPanel = () => {
+    dispatch(changeIsShowPanel(!isShowPanel));
+  };
+
   return (
     <div className={`${style['wy-app-player-bar']} sprite-player`}>
       <div className={`${style['content']} wrap-v2`}>
@@ -195,7 +201,7 @@ export default function WYAppPlayerBar() {
             ></button>
             <button
               className={`${style['btn']} ${style['playlist']} sprite-player`}
-              onClick={() => setIsShowPanel(!isShowPanel)}
+              onClick={switchShowPanel}
             >
               {playMusicsList.length}
             </button>

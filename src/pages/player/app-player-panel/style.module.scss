@@ -8,6 +8,7 @@
   margin: 0 auto;
   color: #e2e2e2;
   .header {
+    position: relative;
     display: flex;
     align-items: center;
     height: 41px;
@@ -21,6 +22,19 @@
     .header-right {
       flex: 1;
       text-align: center;
+      .close-icon {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        cursor: pointer;
+        .icon {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          vertical-align: top;
+          background: url('@/assets/images/playlist.png') -195px 9px;
+        }
+      }
     }
   }
   .main {
@@ -32,6 +46,10 @@
       width: 553px;
       font-size: 12px;
       color: #fff;
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       .play-list {
         cursor: pointer;
         display: flex;

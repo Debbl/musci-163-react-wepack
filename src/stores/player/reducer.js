@@ -9,6 +9,7 @@ const defaultState = Map({
   currentLyricIndex: -1, // 当前歌词索引
   currentSongLyrics: [], // 当前播放歌曲歌词
   playSequence: actionTypes.SEQUENCE_ORDER, // 0 顺序 1 循环 2 随机
+  isShowPanel: false, // 是否显示播放面板
 });
 
 function reducer(state = defaultState, action) {
@@ -25,6 +26,8 @@ function reducer(state = defaultState, action) {
       return state.set('currentSongLyrics', action.lyrics);
     case actionTypes.CHANGE_PLAY_SEQUENCE:
       return state.set('playSequence', action.sequence);
+    case actionTypes.CHANGE_IS_SHOW_PANEL:
+      return state.set('isShowPanel', action.isShowPanel);
     default:
       return state;
   }

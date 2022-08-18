@@ -6,6 +6,7 @@ import { formatDate } from '@/utils/format-utils';
 import {
   changeCurrentSongAction,
   changeCurrentSongIndexAction,
+  changeIsShowPanel,
 } from '@/stores/player/actionCreators';
 
 export default function WYAppPlayerPanel() {
@@ -45,6 +46,10 @@ export default function WYAppPlayerPanel() {
     lyrScrollTo(lyrContainerRef.current, (currentLyricIndex - 3) * 32, 1000);
   }, [currentLyricIndex]);
 
+  // 关闭歌词面板
+  const closeShowPanel = () => {
+    dispatch(changeIsShowPanel(false));
+  };
   return (
     <div className={style['wy-app-player-panel']}>
       <header className={style['header']}>
@@ -53,7 +58,12 @@ export default function WYAppPlayerPanel() {
           <span>收藏全部</span>
           <span>清除</span>
         </div>
-        <div className={style['header-right']}>{currentSong?.name}</div>
+        <div className={style['header-right']}>
+          <span>{currentSong?.name}</span>
+          <span className={style['close-icon']} onClick={closeShowPanel}>
+            <i className={style['icon']}></i>
+          </span>
+        </div>
       </header>
       <main className={style['main']}>
         <div className={style['main-left']}>
@@ -88,7 +98,7 @@ export default function WYAppPlayerPanel() {
           <div className={style['lyr-container']} ref={lyrContainerRef}>
             {currentSongLyrics.map((item, index) => (
               <div
-                key={item.time + item.content}
+                key={index + item.time + item.content}
                 className={`${style['lyr-item']} ${
                   index === currentLyricIndex && style['lyr-active']
                 }`}
